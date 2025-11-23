@@ -8,21 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cars")
+@RequestMapping("cars")
 public class CarController {
-    private final CarService service;
-    public CarController(CarService service) {
-        this.service = service;
-    }
-
     @GetMapping
-    public List<Car> list() {
-        return service.listAll();
-    }
+    public void getAll() {
 
-    @GetMapping("/{id}")
-    public Car getCarById(@RequestParam Long id) {
-        return service.getCarById(id);
+        Car car
+
     }
-    
 }

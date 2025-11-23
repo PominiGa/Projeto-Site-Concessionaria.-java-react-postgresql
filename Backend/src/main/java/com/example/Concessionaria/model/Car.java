@@ -1,5 +1,7 @@
 package com.example.Concessionaria.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.util.UUID;
 
@@ -7,7 +9,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class Car {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id = UUID.randomUUID().toString();
 
     private String marca;
