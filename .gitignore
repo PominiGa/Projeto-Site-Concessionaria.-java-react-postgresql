@@ -21,6 +21,9 @@ rad.json
 #Test results file
 TestResults.xml
 
+.idea/
+*.iml
+
 .projeto-site-concessionaria.-java-react-postgresql/
 .idea/
 .workspace.xml
