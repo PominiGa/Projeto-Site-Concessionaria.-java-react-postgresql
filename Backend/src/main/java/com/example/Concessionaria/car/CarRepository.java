@@ -1,6 +1,5 @@
-package com.example.Concessionaria.repository;
+package com.example.Concessionaria.car;
 
-import com.example.Concessionaria.model.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CarRepository extends JpaRepository<Car, Long> {

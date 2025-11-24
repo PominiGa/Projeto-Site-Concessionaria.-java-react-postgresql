@@ -1,11 +1,17 @@
-package com.example.Concessionaria.model;
+package com.example.Concessionaria.car;
 
 import jakarta.persistence.*;
-
-import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Table(name = "cars")
 @Entity(name = "cars")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Car {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,64 +25,14 @@ public class Car {
     private String urlImagem;
     private boolean vendido = false;
 
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String getChassis() {
-        return chassis;
-    }
-    public void setChassis(String chassis) {
-        this.chassis = chassis;
-    }
-    public String getMarca() {
-        return marca;
-    }
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-    public String getModelo() {
-        return modelo;
-    }
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-    public int getAno() {
-        return ano;
-    }
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
-    public String getCor() {
-        return cor;
-    }
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
-    public double getPreco() {
-        return preco;
-    }
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-    public int getKm() {
-        return km;
-    }
-    public void setKm(int km) {
-        this.km = km;
-    }
-    public String getUrlImagem() {
-        return urlImagem;
-    }
-    public void setUrlImagem(String urlImagem) {
-        this.urlImagem = urlImagem;
-    }
-    public boolean isVendido() {
-        return vendido;
-    }
-    public void setVendido(boolean vendido) {
-        this.vendido = vendido;
+    public Car(CarRequestDTO data) {
+        this.chassis = data.chassis();
+        this.marca = data.marca();
+        this.modelo = data.modelo();
+        this.ano = data.ano();
+        this.cor = data.cor();
+        this.preco = data.preco();
+        this.km = data.km();
+        this.urlImagem = data.urlImage();
     }
 }
