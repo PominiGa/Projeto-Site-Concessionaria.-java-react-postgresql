@@ -20,3 +20,7 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+.projeto-site-concessionaria.-java-react-postgresql/
+.idea/
+.workspace.xml
