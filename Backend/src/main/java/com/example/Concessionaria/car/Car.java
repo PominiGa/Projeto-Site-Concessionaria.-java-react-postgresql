@@ -1,17 +1,15 @@
 package com.example.Concessionaria.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.util.UUID;
 
-import jakarta.persistence.Entity;
-
-@Entity
+@Table(name = "cars")
+@Entity(name = "cars")
 public class Car {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id = UUID.randomUUID().toString();
-
+    private long id;
+    private String chassis;
     private String marca;
     private String modelo;
     private int ano;
@@ -20,16 +18,18 @@ public class Car {
     private int km;
     private String urlImagem;
     private boolean vendido = false;
-    
-    public Car() {
 
-    }
-
-    public String getId() {
+    public long getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
+    }
+    public String getChassis() {
+        return chassis;
+    }
+    public void setChassis(String chassis) {
+        this.chassis = chassis;
     }
     public String getMarca() {
         return marca;
