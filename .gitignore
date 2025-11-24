@@ -23,7 +23,4 @@ TestResults.xml
 
 .idea/
 *.iml
-
-.projeto-site-concessionaria.-java-react-postgresql/
-.idea/
-.workspace.xml
+*.xml
