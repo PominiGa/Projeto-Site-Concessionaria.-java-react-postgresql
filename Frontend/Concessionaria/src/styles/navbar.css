@@ -1,0 +1,15 @@
+.home-container {
+    padding: 20px;
+}
+
+.home-title {
+    font-size: 32px;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}

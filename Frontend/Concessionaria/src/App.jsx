@@ -1,19 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import AppRoutes from "./routes";
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
 
-function App() {
-  const data: CarData[] = [];
-  
-  return (
-    <div className="container">
-      <h1>Projeto Concessionária</h1>
-      <div className="content">
-        {data.map((carData) => <Card/>)}
-      </div>
-    </div>
-  )
+export default function App() {
+    return (
+        <AuthProvider>
+            <BrowserRouter>
+                <AppRoutes />
+            </BrowserRouter>
+        </AuthProvider>
+    );
 }
-
-export default App
