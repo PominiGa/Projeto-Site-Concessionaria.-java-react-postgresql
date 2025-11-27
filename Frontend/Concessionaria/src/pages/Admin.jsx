@@ -28,8 +28,10 @@ export default function Admin() {
                     initial={editCar}
                     onSubmit={(data) => {
                         if (editCar) {
-                            updateCar(editCar.id, data).then(load);
-                            setEditCar(null);
+                            updateCar(editCar.id, data).then(() => {
+                                load();
+                                setEditCar(null);
+                            });
                         } else {
                             createCar(data).then(load);
                         }

@@ -1,15 +1,93 @@
-.home-container {
-    padding: 20px;
+/* NAVBAR BASE */
+.navbar {
+    width: 100%;
+    background: #111;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #1f1f1f;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.home-title {
-    font-size: 32px;
-    margin-bottom: 30px;
+/* LOGO */
+.logo {
+    margin: 0;
+    color: #e0b85c;
+    font-size: 22px;
     font-weight: 700;
+    letter-spacing: .5px;
 }
 
-.car-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
+/* LINKS WRAPPER */
+.links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* LINKS (react-router Link) */
+.links a {
+    text-decoration: none;
+    color: #e2e2e2;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.25s ease, transform 0.15s ease;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+
+.links a:hover {
+    color: #111;
+    background: linear-gradient(90deg, rgba(224,184,92,0.12), rgba(224,184,92,0.08));
+    transform: translateY(-1px);
+}
+
+/* LOGOUT BUTTON — garante visibilidade e estilo consistente com os links */
+.logout-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+
+    /* visual de botão de destaque (padrão) */
+    background: #c92a2a;
+    color: #fff;
+    transition: background 0.2s ease, transform 0.12s ease;
+    -webkit-appearance: none; /* evita estilos nativos em alguns browsers */
+    appearance: none;
+}
+
+/* Hover e foco — acessibilidade */
+.logout-btn:hover,
+.logout-btn:focus {
+    background: #ff4242;
+    transform: translateY(-1px);
+    outline: none;
+    box-shadow: 0 4px 12px rgba(201, 42, 42, 0.12);
+}
+
+/* Se quiser um botão que combine com os links (opcional) */
+.links .linklike-btn {
+    background: transparent;
+    color: #e2e2e2;
+    border: none;
+    padding: 8px 10px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 720px) {
+    .navbar { padding: 14px 20px; }
+    .logo { font-size: 18px; }
+    .links { gap: 12px; }
+    .links a, .logout-btn { font-size: 14px; padding: 7px 10px; }
 }

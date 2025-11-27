@@ -53,7 +53,7 @@ public class CarController {
             car.setCor(data.cor());
             car.setPreco(data.preco());
             car.setKm(data.km());
-            car.setUrlImagem(data.urlImage());
+            car.setUrlImagem(data.urlImagem());
 
             repository.save(car);
 

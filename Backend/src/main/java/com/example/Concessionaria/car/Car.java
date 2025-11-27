@@ -3,6 +3,8 @@ package com.example.Concessionaria.car;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Table(name = "cars")
 @Entity(name = "cars")
 @Getter
@@ -18,7 +20,7 @@ public class Car {
     private String modelo;
     private int ano;
     private String cor;
-    private double preco;
+    private BigDecimal preco;
     private int km;
     private String urlImagem;
     private boolean vendido = false;
@@ -31,6 +33,6 @@ public class Car {
         this.cor = data.cor();
         this.preco = data.preco();
         this.km = data.km();
-        this.urlImagem = data.urlImage();
+        this.urlImagem = data.urlImagem();
     }
 }

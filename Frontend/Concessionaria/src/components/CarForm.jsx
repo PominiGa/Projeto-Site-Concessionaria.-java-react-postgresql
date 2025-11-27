@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function CarForm({ onSubmit, initial }) {
-    const [form, setForm] = useState(initial || {
+    const [form, setForm] = useState({
         chassis: "",
         marca: "",
         modelo: "",
@@ -9,27 +9,25 @@ export default function CarForm({ onSubmit, initial }) {
         cor: "",
         preco: "",
         km: "",
-        urlImage: ""
+        urlImagem: ""
     });
+
+    useEffect(() => {
+        if (initial) setForm(initial);
+    }, [initial]);
 
     const handleChange = e => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
-        //mexer aqui amanhã
+
     return (
-            <form className="car-form" onSubmit={e => {
-            e.preventDefault();
-
-            const payload = {
-                ...form,
-                ano: form.ano ? parseInt(form.ano, 10) : null,
-                km: form.km ? parseInt(form.km, 10) : 0,
-                preco: form.preco ? parseFloat(form.preco) : 0,
-                urlImage: form.urlImage || form.urlImagem || ""
-            };
-
-            onSubmit(payload);
-            }}>
+        <form
+            className="car-form"
+            onSubmit={e => {
+                e.preventDefault();
+                onSubmit(form);
+            }}
+        >
             <input name="chassis" placeholder="Chassi" onChange={handleChange} value={form.chassis} />
             <input name="marca" placeholder="Marca" onChange={handleChange} value={form.marca} />
             <input name="modelo" placeholder="Modelo" onChange={handleChange} value={form.modelo} />
@@ -39,9 +37,11 @@ export default function CarForm({ onSubmit, initial }) {
             <input name="preco" placeholder="Preço" type="number" onChange={handleChange} value={form.preco} />
             <input name="km" placeholder="KM" type="number" onChange={handleChange} value={form.km} />
 
-            <input name="urlImage" placeholder="URL da imagem" onChange={handleChange} value={form.urlImage} />
+            <input name="urlImagem" placeholder="URL da imagem" onChange={handleChange} value={form.urlImagem} />
 
-            <button type="submit">Salvar</button>
+            <button type="submit">
+                {initial ? "Editar Carro" : "Salvar"}
+            </button>
         </form>
     );
 }

@@ -5,6 +5,8 @@ import "../styles/navbar.css";
 export default function Navbar() {
     const { user, logout } = useAuth();
 
+    console.debug("Navbar user:", user);
+
     return (
         <nav className="navbar">
             <h2 className="logo">Concessionária Premium</h2>
@@ -15,7 +17,19 @@ export default function Navbar() {
                 {user?.role === "admin" && <Link to="/admin">Admin</Link>}
 
                 {!user && <Link to="/login">Login</Link>}
-                {user && <button onClick={logout}>Sair</button>}
+
+                {user && (
+                    <button
+                        type="button"
+                        className="logout-btn"
+                        onClick={() => {
+                            if (typeof logout === "function") logout();
+                            else console.warn("logout não é uma função:", logout);
+                        }}
+                    >
+                        Sair
+                    </button>
+                )}
             </div>
         </nav>
     );
