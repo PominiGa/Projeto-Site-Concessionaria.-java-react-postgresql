@@ -1,4 +1,3 @@
 package com.example.Concessionaria.Usuario;
 
-public class AuthDTO {
-}
+public record AuthDTO (String UserName, String senha) {}
