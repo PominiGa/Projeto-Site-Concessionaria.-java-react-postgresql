@@ -1,9 +1,18 @@
 import axios from "axios";
 
-const API = "http://localhost:8080/cars";
+const api = axios.create({ baseURL: "http://localhost:8080" });
 
-export const getCars = () => axios.get(API);
-export const getCar = (id) => axios.get(`${API}/${id}`);
-export const createCar = (data) => axios.post(API, data);
-export const updateCar = (id, data) => axios.put(`${API}/${id}`, data);
-export const deleteCar = (id) => axios.delete(`${API}/${id}`);
+api.interceptors.request.use((config) => {
+	const token = localStorage.getItem("token");
+	if (token) {
+		config.headers = config.headers || {};
+		config.headers["Authorization"] = `Bearer ${token}`;
+	}
+	return config;
+});
+
+export const getCars = () => api.get("/cars");
+export const getCar = (id) => api.get(`/cars/${id}`);
+export const createCar = (data) => api.post("/cars", data);
+export const updateCar = (id, data) => api.put(`/cars/${id}`, data);
+export const deleteCar = (id) => api.delete(`/cars/${id}`);

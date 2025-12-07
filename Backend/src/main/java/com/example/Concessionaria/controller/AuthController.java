@@ -26,7 +26,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthDTO data) {
 
-        User user = repository.findByUsername(data.UserName())
+        User user = repository.findByUserName(data.UserName())
                 .orElse(null);
 
         if (user == null) {
@@ -37,7 +37,7 @@ public class AuthController {
             return ResponseEntity.status(401).body("Senha incorreta");
         }
 
-        String token = tokenService.generateToken(user.getUserName());
+        String token = tokenService.GenerateToken(user.getUserName());
 
         return ResponseEntity.ok(token);
     }
