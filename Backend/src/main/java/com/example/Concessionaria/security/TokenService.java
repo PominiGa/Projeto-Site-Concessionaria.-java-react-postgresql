@@ -1,20 +1,42 @@
-package com.example.Concessionaria.user;
+package com.example.Concessionaria.security;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
 
 @Service
 public class TokenService {
-    private final String secret = "1234"; //temporario, eu acho
 
-    public String GenerateToken(String UserName) {
-        return Jwts.builder().setSubject(UserName).setExpiration(new Date(System.currentTimeMillis() + 86400000)).signWith(SignatureAlgorithm.HS256, secret).compact();
+    @Value("${jwt.secret}")
+    private String secret;
+
+    @Value("${jwt.expiration}")
+    private Long expiration;
+
+    private static final SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
+    public static String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .signWith(secretKey)
+                .compact();
     }
 
     public String validateToken(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
+        try {
+            return Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+        } catch (ExpiredJwtException e) {
+            throw new RuntimeException("Token expirado");
+        } catch (JwtException e) {
+            throw new RuntimeException("Token inválido");
+        }
     }
 }

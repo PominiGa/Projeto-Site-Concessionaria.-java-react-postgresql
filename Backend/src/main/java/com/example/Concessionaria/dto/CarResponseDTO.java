@@ -1,4 +1,6 @@
-package com.example.Concessionaria.car;
+package com.example.Concessionaria.dto;
+
+import com.example.Concessionaria.car.Car;
 
 import java.math.BigDecimal;
 

@@ -2,39 +2,30 @@ package com.example.Concessionaria.controller;
 
 import com.example.Concessionaria.car.Car;
 import com.example.Concessionaria.car.CarRepository;
-import com.example.Concessionaria.car.CarRequestDTO;
-import com.example.Concessionaria.car.CarResponseDTO;
+import com.example.Concessionaria.dto.CarRequestDTO;
+import com.example.Concessionaria.dto.CarResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("cars")
+@RequestMapping("/cars")
 public class CarController {
 
     @Autowired
     private CarRepository repository;
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PostMapping
-    public ResponseEntity<CarResponseDTO> saveCar(@RequestBody CarRequestDTO data) {
-        Car car = new Car(data);
-        repository.save(car);
-        return ResponseEntity.ok(new CarResponseDTO(car));
-    }
-
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
-    public List<CarResponseDTO> getAll() {
-        return repository.findAll()
+    public ResponseEntity<List<CarResponseDTO>> getAll() {
+        List<CarResponseDTO> cars = repository.findAll()
                 .stream()
                 .map(CarResponseDTO::new)
                 .toList();
+        return ResponseEntity.ok(cars);
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/{id}")
     public ResponseEntity<CarResponseDTO> getById(@PathVariable Long id) {
         return repository.findById(id)
@@ -42,7 +33,13 @@ public class CarController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping
+    public ResponseEntity<CarResponseDTO> saveCar(@RequestBody CarRequestDTO data) {
+        Car car = new Car(data);
+        repository.save(car);
+        return ResponseEntity.ok(new CarResponseDTO(car));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<CarResponseDTO> updateCar(@PathVariable Long id, @RequestBody CarRequestDTO data) {
         return repository.findById(id).map(car -> {
@@ -54,20 +51,16 @@ public class CarController {
             car.setPreco(data.preco());
             car.setKm(data.km());
             car.setUrlImagem(data.urlImagem());
-
             repository.save(car);
-
             return ResponseEntity.ok(new CarResponseDTO(car));
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
         if (!repository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
     }

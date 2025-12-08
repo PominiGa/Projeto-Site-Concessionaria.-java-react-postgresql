@@ -1,4 +1,4 @@
-package com.example.Concessionaria.Usuario;
+package com.example.Concessionaria.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,8 @@ import lombok.Setter;
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String UserName;
+    @Column(unique = true)
+    private String username;
     private String senha;
+    private String role;
 }

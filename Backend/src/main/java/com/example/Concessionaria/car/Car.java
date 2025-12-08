@@ -1,20 +1,24 @@
 package com.example.Concessionaria.car;
 
+import com.example.Concessionaria.dto.CarRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 
 @Table(name = "cars")
-@Entity(name = "cars")
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Car {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String chassis;
     private String marca;
     private String modelo;
