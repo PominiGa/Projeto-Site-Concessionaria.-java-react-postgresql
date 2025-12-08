@@ -1,4 +1,4 @@
-package com.example.Concessionaria.Usuario;
+package com.example.Concessionaria.user;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
