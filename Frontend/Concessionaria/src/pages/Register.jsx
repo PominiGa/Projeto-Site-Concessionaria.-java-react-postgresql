@@ -6,7 +6,6 @@ export default function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -23,7 +22,6 @@ export default function Register() {
       <form onSubmit={handleRegister} className="login-box">
         <h2>Registrar</h2>
         <input placeholder="Usuário" value={username} onChange={e => setUsername(e.target.value)} />
-        <input placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
         <input placeholder="Senha" type="password" value={password} onChange={e => setPassword(e.target.value)} />
         <button type="submit">Registrar</button>
         {error && <p className="error">{error}</p>}

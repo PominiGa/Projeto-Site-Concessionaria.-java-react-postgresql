@@ -15,7 +15,9 @@ export default function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         setError("");
+
         const ok = await login(username, password);
+
         if (ok) navigate("/");
         else setError("Login inválido!");
     };
@@ -25,8 +27,11 @@ export default function Login() {
             <form onSubmit={handleLogin} className="login-box">
                 <h2>Login</h2>
 
-                <input placeholder="Usuário" value={username} onChange={e => setUsername(e.target.value)} />
-                <input placeholder="Senha" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                <input placeholder="Usuário" value={username}
+                    onChange={e => setUsername(e.target.value)} />
+
+                <input placeholder="Senha" type="password" value={password}
+                    onChange={e => setPassword(e.target.value)} />
 
                 <button type="submit">Entrar</button>
 
