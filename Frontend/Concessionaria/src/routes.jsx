@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext";
 
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 
@@ -13,7 +14,8 @@ export default function AppRoutes() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
 
-            {/* Apenas ADMIN pode acessar */}
+            <Route path="/register" element={<Register />} />
+
             <Route
                 path="/admin"
                 element={

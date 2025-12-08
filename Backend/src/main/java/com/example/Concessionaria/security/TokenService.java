@@ -19,12 +19,14 @@ public class TokenService {
 
     private static final SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public static String generateToken(String username) {
+    public static String generateToken(String username, String role) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("role", role)
                 .signWith(secretKey)
                 .compact();
     }
+
 
     public String validateToken(String token) {
         try {

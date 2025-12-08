@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -12,7 +13,9 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
-    const ok = await register(username, email, password);
+
+    const ok = await register(username, password);
+
     if (ok) navigate("/login");
     else setError("Erro ao registrar!");
   };
@@ -21,9 +24,22 @@ export default function Register() {
     <div className="login-container">
       <form onSubmit={handleRegister} className="login-box">
         <h2>Registrar</h2>
-        <input placeholder="Usuário" value={username} onChange={e => setUsername(e.target.value)} />
-        <input placeholder="Senha" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+
+        <input
+          placeholder="Usuário"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+        />
+
+        <input
+          placeholder="Senha"
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+
         <button type="submit">Registrar</button>
+
         {error && <p className="error">{error}</p>}
       </form>
     </div>

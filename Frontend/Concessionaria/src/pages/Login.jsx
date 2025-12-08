@@ -34,6 +34,7 @@ export default function Login() {
                     onChange={e => setPassword(e.target.value)} />
 
                 <button type="submit">Entrar</button>
+                <p>Não tem uma conta? <a href="/register">Registre-se</a></p>
 
                 {error && <p className="error">{error}</p>}
             </form>

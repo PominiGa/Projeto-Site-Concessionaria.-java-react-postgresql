@@ -45,7 +45,7 @@ public class AuthController {
             return ResponseEntity.status(401).body("Usuário ou senha inválidos");
         }
 
-        String token = TokenService.generateToken(user.getUsername());
+        String token = TokenService.generateToken(user.getUsername(), user.getRole());
         if (token == null || user.getUsername() == null) {
             return ResponseEntity.status(500).body("Erro ao gerar token");
         }

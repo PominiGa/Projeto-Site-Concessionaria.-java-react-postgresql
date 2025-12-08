@@ -52,3 +52,13 @@ const isAdmin = () => {
         </AuthContext.Provider>
     );
 }
+const register = async (username, password) => {
+    try {
+        const res = await api.post("/auth/register", { username, password });
+        return res.status === 200 || res.status === 201;
+    } catch (err) {
+        console.error("Erro no register:", err);
+        return false;
+    }
+};
+
