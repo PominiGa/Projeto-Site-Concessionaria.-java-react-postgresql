@@ -8,18 +8,18 @@ import Admin from "./pages/Admin";
 
 export default function AppRoutes() {
     const { user } = useAuth();
+    const role = localStorage.getItem("role"); 
 
     return (
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-
             <Route path="/register" element={<Register />} />
 
             <Route
                 path="/admin"
                 element={
-                    user?.role === "admin"
+                    user && role === "ADMIN"
                         ? <Admin />
                         : <Navigate to="/login" />
                 }

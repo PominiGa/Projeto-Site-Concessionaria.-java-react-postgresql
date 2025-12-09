@@ -4,8 +4,7 @@ import "../styles/navbar.css";
 
 export default function Navbar() {
     const { user, logout } = useAuth();
-
-    console.debug("Navbar user:", user);
+    const role = localStorage.getItem("role");
 
     return (
         <nav className="navbar">
@@ -14,19 +13,12 @@ export default function Navbar() {
             <div className="links">
                 <Link to="/">Home</Link>
 
-                {user?.role === "admin" && <Link to="/admin">Admin</Link>}
+                {role === "ADMIN" && <Link to="/admin">Admin</Link>}
 
                 {!user && <Link to="/login">Login</Link>}
 
                 {user && (
-                    <button
-                        type="button"
-                        className="logout-btn"
-                        onClick={() => {
-                            if (typeof logout === "function") logout();
-                            else console.warn("logout não é uma função:", logout);
-                        }}
-                    >
+                    <button className="logout-btn" onClick={logout}>
                         Sair
                     </button>
                 )}
